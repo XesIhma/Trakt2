@@ -39,3 +39,5 @@ while game.is_playing:
     game.hero.whoami()
   elif command[0] in ("help", "pomoc"):
     Konsola.help()
+
+  #test gitignore
