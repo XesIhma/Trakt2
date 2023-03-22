@@ -40,4 +40,9 @@ while game.is_playing:
   elif command[0] in ("help", "pomoc"):
     Konsola.help()
 
-  #test gitignore
+  
+
+
+  ## GODMODE STUFF ##
+  elif command[0] in ("map", "mapa"):
+    Konsola.map(hero)

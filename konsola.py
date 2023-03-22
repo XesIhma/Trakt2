@@ -82,11 +82,12 @@ class Konsola:
 
 
 	@classmethod
-	def prompt(cls, hero, inp=True):
-		if inp:colorr = f_lgreen
+	def prompt(cls, hero, single_inp=True):
+		if single_inp: colorr = f_lgreen
 		else: colorr = f_lmagenta
+
 		print(colorr+"<HP: {}/{} Stamina: {}/{}>".format(math.ceil(hero.param["hp"]), hero.param["hp_max"], math.ceil(hero.param["stamina"]), math.ceil(hero.param["stamina_aviable"]))+c_reset, end="")
-		if inp:
+		if single_inp:
 			decision = input().lower()
 			command = decision.split()
 			return command
@@ -120,12 +121,15 @@ class Konsola:
 	@classmethod
 	def printRandom(cls, komunikat):
 		print(random.choice(komunikat))
+
 	@classmethod
 	def hr(cls):
 		print("---------------")
+
 	@classmethod
-	def sleep(cls, long):
-		time.sleep(long)
+	def sleep(cls, time_in_sec):
+		time.sleep(time_in_sec)
+
 	@classmethod
 	def compas(cls, world, mob_x, mob_y, mob_z):
 		s = world.s[mob_x][mob_y][mob_z]
@@ -323,12 +327,13 @@ class Konsola:
 		cls.print("> FUNCKJE GRY: ", "white")
 		cls.print("    save - zapisz grę", "lwhite")
 		cls.print("    exit - zakończ grę", "lwhite")
+
 	@classmethod
 	def map(cls, hero):
 		loc = hero.current_location
 		os.system('CLS')
-		for y in range(loc.sizeY):
-			for x in range(loc.sizeX):
+		for y in range(loc.size_y):
+			for x in range(loc.size_x):
 				if hero.x == x and hero.y == y:
 					print(Back.MAGENTA + Style.BRIGHT, end="")
 				else:
@@ -337,6 +342,7 @@ class Konsola:
 				print(" ", end="")
 			print("")
 		print(Style.RESET_ALL, end='')
+
 	@classmethod
 	def nameConvert(cls, command):
 		name = ""
@@ -349,6 +355,7 @@ class Konsola:
 				name = name+command[x+1]+' '
 			name = name[:-1] #usuwa ostatni znak czyli spacje
 		return name
+	
 	@classmethod
 	def parameters(cls, mob):
 		print("HP:         "+Style.BRIGHT+str(mob.param["hp"])+"/"+str(mob.param["hp_max"])+Style.RESET_ALL)
@@ -361,8 +368,9 @@ class Konsola:
 		print("Szybkość: "+Style.BRIGHT+str(mob.stat["speed"])+Style.RESET_ALL)
 		print("Spostrzegawczość: "+Style.BRIGHT+str(mob.stat["perceptivity"])+Style.RESET_ALL)
 		print("Widoczność: "+Style.BRIGHT+str(mob.stat["visibility"])+Style.RESET_ALL)
+
 	@classmethod
-	def edit(cls, hero, what, exit):
+	def edit(cls, hero, what, surface):
 		if what == "n":
 			print("Wprowadź nazwę: ", end="")
 			keyboard.write(hero.current_location.s[hero.x][hero.y][hero.z].name)
@@ -418,8 +426,8 @@ class Konsola:
 				sq.up = True
 				sq.down = True
 		elif what == "s":
-			exit = int(exit)
-			if exit in (1,2,3,4,5,6,7,8,9):
+			surface = int(surface)
+			if surface in (1,2,3,4,5,6,7,8,9):
 				print(hero.current_location.s[hero.x][hero.y][hero.z].surface)
-				hero.current_location.s[hero.x][hero.y][hero.z].surface = exit
+				hero.current_location.s[hero.x][hero.y][hero.z].surface = surface
 				print(hero.current_location.s[hero.x][hero.y][hero.z].surface)

@@ -34,16 +34,9 @@ class Game:
 					Konsola.print("Wprowadź poprawny wybór", "red", "green")
 	
 	def new_game(self):
-		self.is_playing = True
-		Konsola.clear()
-		Konsola.print("Nowa gra", "lwhite")
-		Konsola.hr()
 		maps = ["initial/tantar.json", "initial/czarny_las.json"]
-		self.world = World(maps)
-		self.hero = self.world.location[0].mobs[0]
-		# ccgange to worlds method instead of square
-		self.world.show_square(self.hero)
-		self.time_in_sec = 0
+		self.game_setter(maps, "Nowa gra", 0)
+
 		saves = self.open_saves()
 		try:
 			self.gameplay_numer = saves[-1]["save_number"]+1
@@ -59,8 +52,18 @@ class Game:
 		return False
 
 	def arena(self):
-		Konsola.print("Section in development", "red", "green")
-		return False
+		self.game_setter(['arena/arena.json'], "Arena reningowa", 0)
+		
+	
+	def game_setter(self, maps, message, time):
+		Konsola.clear()
+		Konsola.print(message, "lwhite")
+		Konsola.hr()
+		self.world = World(maps)
+		self.hero = self.world.location[0].mobs[0]
+		self.world.show_square(self.hero)
+		self.time_in_sec = time
+		self.is_playing = True
 	
 	def endGame(self):
 		self.is_playing = False

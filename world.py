@@ -48,6 +48,13 @@ class World:
 		Konsola.print(s.name, "lyellow")
 		Konsola.wrap(s.description, "lwhite")
 		Konsola.compas(self, hero_x, hero_y, hero_z)
+		for i in s.items:
+			Konsola.print(i.name, "lcyan")
+		
+		for m in hero.current_location.mobs:
+			if m.x == hero.x and m.y == hero.y and m.z == hero.z and m.id != 0:
+				print("  ", end="")
+				Konsola.print(m.name, "lmagenta")
 	
 	def move_mob_in_direction(self, mob, direction):
 		did_move = False
@@ -74,71 +81,71 @@ class World:
 				case 8:
 					for loc in self.world.location:
 					#sprawdzam, czy obecnie(!) hero znajduje się dokładnie jedną kratkę na południe od lokacji
-						if loc.y + loc.sizeY == mobY and loc.x <= mobX <= loc.x+loc.sizeX: 
+						if loc.y + loc.size_y == mobY and loc.x <= mobX <= loc.x+loc.size_x: 
 							mob.x = mobX - loc.x
 							mob.y = mobY - loc.y - 1
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 6:
 					for loc in self.world.location:
-						if loc.x - 1 == mobX and loc.y <= mobY <= loc.y+loc.sizeY:
+						if loc.x - 1 == mobX and loc.y <= mobY <= loc.y+loc.size_y:
 							mob.x = 0
 							mob.y = mobY - loc.y 
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 2:
 					for loc in self.world.location:
-						if loc.y - 1 == mobY and loc.x <= mobX <= loc.x+loc.sizeX:
+						if loc.y - 1 == mobY and loc.x <= mobX <= loc.x+loc.size_x:
 							mob.x = mobX - loc.x
 							mob.y = 0
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 4:
 					for loc in self.world.location:
-						if loc.x + loc.sizeX == mobX and loc.y <= mobY <= loc.y+loc.sizeY:
+						if loc.x + loc.size_x == mobX and loc.y <= mobY <= loc.y+loc.size_y:
 							mob.x = mobX - loc.x -1
 							mob.y = mobY - loc.y 
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 9:
 					for loc in self.world.location:
 						#spr, czy hero.x + 1 i hero y - 1 jest na obszarze lokacji
-						if loc.y <= mobY - 1 <= loc.y + loc.sizeY - 1 and loc.x <= mobX + 1 <= loc.x + loc.sizeX -1:
+						if loc.y <= mobY - 1 <= loc.y + loc.size_y - 1 and loc.x <= mobX + 1 <= loc.x + loc.size_x -1:
 							mob.x = mobX - loc.x + 1
 							mob.y = mobY - loc.y - 1
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 3:
 					for loc in self.world.location:
 						#spr, czy hero.x + 1 i hero y + 1 jest na obszarze lokacji
-						if loc.y <= mobY + 1 <= loc.y + loc.sizeY - 1 and loc.x <= mobX + 1 <= loc.x + loc.sizeX -1:
+						if loc.y <= mobY + 1 <= loc.y + loc.size_y - 1 and loc.x <= mobX + 1 <= loc.x + loc.size_x -1:
 							mob.x = mobX - loc.x + 1
 							mob.y = mobY - loc.y + 1
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 1:
 					for loc in self.world.location:
 						#spr, czy hero.x - 1 i hero y + 1 jest na obszarze lokacji
-						if loc.y <= mobY + 1 <= loc.y + loc.sizeY - 1 and loc.x <= mobX - 1 <= loc.x + loc.sizeX -1:
+						if loc.y <= mobY + 1 <= loc.y + loc.size_y - 1 and loc.x <= mobX - 1 <= loc.x + loc.size_x -1:
 							mob.x = mobX - loc.x - 1
 							mob.y = mobY - loc.y + 1
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 				case 7:
 					for loc in self.world.location:
 						#spr, czy hero.x - 1 i hero y - 1 jest na obszarze lokacji
-						if loc.y <= mobY - 1 <= loc.y + loc.sizeY - 1 and loc.x <= mobX - 1 <= loc.x + loc.sizeX -1:
+						if loc.y <= mobY - 1 <= loc.y + loc.size_y - 1 and loc.x <= mobX - 1 <= loc.x + loc.size_x -1:
 							mob.x = mobX - loc.x - 1
 							mob.y = mobY - loc.y - 1
-							mob.z = mobZ - (self.world.groundLevel - loc.groundLevel)
-							mob.currentLocation = loc
+							mob.z = mobZ - (self.world.ground_level - loc.ground_level)
+							mob.current_location = loc
 							return True
 		return False
 	

@@ -36,7 +36,11 @@ class Location:
       self.add_doors(door_list)
       self.add_doors_to_squares()
 
+      self.add_items(item_list)
       self.add_mobs(mob_list)
+
+      
+
       
   def add_squares(self, square_list):
     self.s = [[[Square(i, j, k, 5, "Pustka", "Nic tu nie ma", [], n=1,ne=1,e=1,se=1,s=1,sw=1,w=1,nw=1,u=1,d=1) for k in range(self.size_z)] for j in range(self.size_y)] for i in range(self.size_x)]
@@ -61,6 +65,7 @@ class Location:
       x = d.x
       y = d.y
       z = d.z
+      # print(f"{x} + {y} + {z} - {d.direction} ({d.open})")
       if d.direction == 8:
         self.s[x][y][z].door_n = d
         self.s[x][y-1][z].door_s = d
@@ -70,7 +75,11 @@ class Location:
       elif d.direction == 0:
         self.s[x][y][z].door_d = d
         self.s[x][y][z-1].door_u = d
-  
+      
+  def add_items(self, item_list):
+    pass
+
+
   def add_mobs(self, mob_list):
     for m in mob_list:
       keywords = m["keywords"]

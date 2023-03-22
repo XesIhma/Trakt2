@@ -69,17 +69,17 @@ class Square:
 			8: True,
 			9: True
 		}
-		try: doors[0] = self.doorD.open
+		try: doors[0] = self.door_d.open
 		except: pass
-		try: doors[2] = self.doorS.open
+		try: doors[2] = self.door_s.open
 		except: pass
-		try: doors[4] = self.doorW.open
+		try: doors[4] = self.door_w.open
 		except: pass
-		try: doors[5] = self.doorU.open
+		try: doors[5] = self.door_u.open
 		except: pass
-		try: doors[6] = self.doorE.open
+		try: doors[6] = self.door_e.open
 		except: pass
-		try: doors[8] = self.doorN.open
+		try: doors[8] = self.door_n.open
 		except: pass
 
 		return doors
