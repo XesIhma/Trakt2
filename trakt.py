@@ -7,8 +7,19 @@ game.choose_game()
 world = game.world
 hero = game.hero
 
+
+commands = {
+  
+}
+
 while game.is_playing:
   command = Konsola.prompt(game.hero)
+  command_name = command[0]
+  command_args = command[1:]
+
+
+
+
   if len(command) == 0:
     print("Co chcesz zrobić?")
   elif command[0] in ("north", "n", "8"):
